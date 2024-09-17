@@ -54,7 +54,7 @@ void readGiro() {
   Wire.endTransmission(false);
   Wire.requestFrom(MPU, 6, true);
 
-  // Para faixa de +-250°/s divisor = 131
+  // Para faixa de +-250°/s divisor = 131.0 
   GyroX = (Wire.read() << 8 | Wire.read()) / 131.0f;
   GyroY = (Wire.read() << 8 | Wire.read()) / 131.0f;
   GyroZ = (Wire.read() << 8 | Wire.read()) / 131.0f;
@@ -119,12 +119,12 @@ void mpu_loop() {
   yaw = gyroAngleZ;
 }
 
-/* Função para reiniciar o giroscopio em Z */
+/* Função para reiniciar o giroscopio */
 void mpu_reset() {
   gyroAngleX = 0;
   gyroAngleY = 0;
   gyroAngleZ = 0;
-
+  
   // reinicia o tempo base do giroscópio
   currentTime = micros();
   mpu_loop();
